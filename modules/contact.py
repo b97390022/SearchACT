@@ -68,7 +68,7 @@ class Contact:
                 "idx_chinese_name",
                 "idx_english_name",
                 "idx_email",
-                "idx_cellphone"
+                # "idx_cellphone"
             ), 
             self._get_colname_index()
             ))
@@ -92,8 +92,8 @@ class Contact:
                 idx_english_name = list_cell.index("Hua-Chien Chen")
             if "hcchen@actgenomics.com" in list_cell:
                 idx_email = list_cell.index("hcchen@actgenomics.com")
-            if "0955-622-114" in list_cell:
-                idx_cellphone = list_cell.index("0955-622-114")
+            # if "0955-622-114" in list_cell:
+            #     idx_cellphone = list_cell.index("0955-622-114")
         return (
             idx_phone,
             idx_office,
@@ -101,7 +101,7 @@ class Contact:
             idx_chinese_name,
             idx_english_name,
             idx_email,
-            idx_cellphone,
+            # idx_cellphone,
         )
 
     def locate_latest_contact_file(self, cwd: str) -> Union[None, str]:
@@ -136,7 +136,7 @@ class Contact:
                 chinese_name,
                 english_name,
                 email,
-                cellphone,
+                # cellphone,
             ) = (
                 list_row[x].value
                 for x in (
@@ -157,7 +157,7 @@ class Contact:
                     unicodedata.normalize('NFKC', chinese_name),
                     unicodedata.normalize('NFKC', english_name),
                     unicodedata.normalize('NFKC', email),
-                    cellphone,
+                    # cellphone,
                 )
             elif finish:
                 break
@@ -188,7 +188,7 @@ class Contact:
             chinese_name,
             english_name,
             email,
-            cellphone,
+            # cellphone,
         ) in self.iter_contact_data():
             english_name_var2 = english_name.replace("-", " ").strip()
             english_name_var3 = english_name.replace("-", "").strip()
@@ -198,7 +198,7 @@ class Contact:
             # first part: key_ to result
             dict_mapping_data[key_] = [
                 str(x)
-                for x in [chinese_name, english_name, department, email, phone, cellphone]
+                for x in [chinese_name, english_name, department, email, phone]
             ]
             
             # second part: query items to key
@@ -257,10 +257,10 @@ class Contact:
             # by Phone num
             dict_mapping_data.setdefault(str(phone), set()).add(key_)
             # by cell phone num
-            dict_mapping_data.setdefault(str(cellphone), set()).add(key_)
-            dict_mapping_data.setdefault(
-                str(cellphone).replace("-", "").replace(" ", ""), set()
-            ).add(key_)
+            # dict_mapping_data.setdefault(str(cellphone), set()).add(key_)
+            # dict_mapping_data.setdefault(
+            #     str(cellphone).replace("-", "").replace(" ", ""), set()
+            # ).add(key_)
             # by department
             dict_mapping_data.setdefault(str(department), set()).add(key_)
             # by department's abbreviation
